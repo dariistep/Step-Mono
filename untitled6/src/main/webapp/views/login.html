@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html xmlns:form="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Monobank Login</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/styles.css">
+</head>
+<body>
+    <div class="login-container">
+        <h1>Вхід</h1>
+        <div class="form-group">
+            <label for="email"></label>
+            <input type="email" class="form-control" id="email" placeholder="Enter your email">
+        </div>
+        <div class="form-group">
+            <label for="password"></label>
+            <input type="password" class="form-control" id="password" placeholder="Enter your password">
+        </div>
+        <!--<form:form action="${pageContext.request.contextPath}/login" method="post" modelAttribute="user">
+            <form:input path="email" type="email" placeholder="Email" />-->
+            <form:input path="password" type="password" placeholder="Password" />
+            <button type="submit" class="submit-btn">Підтвердити</button>
+            <a href="${pageContext.request.contextPath}/registration" class="register-link">Реєстрація</a>
+        </form:form>
+        <div class="social-login">
+            <a href="#" class="google-login">
+                <img src="${pageContext.request.contextPath}/static/img/google-icon.png" alt="Google" />
+                Вхід за допомогою Google
+            </a>
+            <a href="#" class="apple-login">
+                <img src="${pageContext.request.contextPath}/static/img/apple-icon.png" alt="Apple" />
+                Вхід за допомогою Apple
+            </a>
+        </div>
+    </div>
+</body>
+</html>

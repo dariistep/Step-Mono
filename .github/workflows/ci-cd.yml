@@ -1,0 +1,37 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out the code
+      uses: actions/checkout@v2
+
+    - name: Build Docker image
+      run: |
+        docker build -t myapp:latest .
+
+    # Optional: Add tests here if needed
+
+    - name: Deploy to Azure VM via SSH
+      uses: appleboy/ssh-action@v0.1.8
+      with:
+        host: ${{ secrets.AZURE_VM_IP }}
+        username: ${{ secrets.AZURE_VM_USER }}
+        key: ${{ secrets.AZURE_VM_KEY }}
+        script: |
+          # Change directory to where your app is stored
+          cd /home/${{ secrets.AZURE_VM_USER }}/myapp
+          # Pull latest code from GitHub (if your VM repo is set up)
+          git pull origin main
+          # Stop any existing containers
+          docker-compose down
+          # Build and start the new containers in detached mode
+          docker-compose up -d --build

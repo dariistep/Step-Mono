@@ -18,8 +18,6 @@ jobs:
       run: |
         docker build -t myapp:latest .
 
-    # Optional: Add tests here if needed
-
     - name: Deploy to Azure VM via SSH
       uses: appleboy/ssh-action@v0.1.8
       with:
